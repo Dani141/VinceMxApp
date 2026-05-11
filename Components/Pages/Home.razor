@@ -1,0 +1,220 @@
+﻿@* Home.razor - Rediseño Profesional *@
+@page "/"
+@inject IJSRuntime JSRuntime
+
+@* Hero Section *@
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+        <span class="hero-badge">Excelencia Operativa en Acapulco</span>
+        <h1>Seguridad y Limpieza<br> <span class="highlight">con Estándares Globales</span></h1>
+        <p>Más de 15 años brindando protección y saneamiento profesional a empresas, hoteles e instituciones en el puerto de Acapulco.</p>
+        <div class="hero-buttons">
+            <button class="btn-primary">Solicitar Cotización</button>
+            <button class="btn-outline">Conocer Servicios</button>
+        </div>
+    </div>
+</section>
+
+@* Sección de Servicio: Seguridad Privada *@
+<section class="service-section" id="seguridad">
+    <div class="container">
+        <div class="service-row reverse">
+            <div class="service-content">
+                <span class="service-tag">Protección Integral</span>
+                <h2>Seguridad Privada</h2>
+                <p>Soluciones personalizadas de vigilancia y protección para su negocio, respaldadas por personal certificado y tecnología de punta.</p>
+                <ul class="service-features">
+                    <li>✓ Vigilancia física y armada 24/7</li>
+                    <li>✓ Control de acceso y rondines perimetrales</li>
+                    <li>✓ Monitoreo de CCTV con análisis inteligente</li>
+                    <li>✓ Escolta de valores y ejecutivos</li>
+                    <li>✓ Seguridad para eventos especiales</li>
+                </ul>
+                <button class="btn-secondary">Contratar servicio</button>
+            </div>
+            <div class="service-image">
+                <div class="image-placeholder seguridad-bg"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* Sección de Servicio: Limpieza Profesional *@
+<section class="service-section alt-bg" id="limpieza">
+    <div class="container">
+        <div class="service-row">
+            <div class="service-image">
+                <div class="image-placeholder limpieza-bg"></div>
+            </div>
+            <div class="service-content">
+                <span class="service-tag">Saneamiento Profundo</span>
+                <h2>Limpieza Profesional</h2>
+                <p>Servicios de limpieza industrial y sanitaria que garantizan entornos impecables, seguros y libres de patógenos para su operación.</p>
+                <ul class="service-features">
+                    <li>✓ Limpieza de oficinas y corporativos</li>
+                    <li>✓ Sanitización de áreas comunes</li>
+                    <li>✓ Mantenimiento de pisos y alfombras</li>
+                    <li>✓ Limpieza de naves industriales</li>
+                    <li>✓ Gestión de residuos peligrosos</li>
+                </ul>
+                <button class="btn-secondary">Solicitar servicio</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* Por qué elegirnos - Ventajas *@
+<section class="advantages-section">
+    <div class="container">
+        <h2 class="section-title light">¿Por qué somos su mejor aliado?</h2>
+        <div class="advantages-grid">
+            <div class="advantage-card">
+                <div class="advantage-icon">🏅</div>
+                <h3>Personal Certificado</h3>
+                <p>Capacitación continua en protocolos de seguridad y limpieza, avalada por la STPS.</p>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-icon">📡</div>
+                <h3>Tecnología de Punta</h3>
+                <p>Equipos de monitoreo y maquinaria ecológica de última generación para máxima eficiencia.</p>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-icon">⏱️</div>
+                <h3>Respuesta Inmediata</h3>
+                <p>Garantizamos atención en menos de 2 horas ante cualquier incidente o emergencia.</p>
+            </div>
+            <div class="advantage-card">
+                <div class="advantage-icon">🛡️</div>
+                <h3>Cobertura Total</h3>
+                <p>Seguro de responsabilidad civil que respalda cada uno de nuestros servicios.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@* Contacto y Redes *@
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h3>GS-Protect & Clean</h3>
+                <p>Seguridad y Limpieza Profesional en Acapulco, México. Protegiendo y cuidando lo que más importa a su empresa.</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contacto Directo</h4>
+                <p>📞 +52 (744) 123 4567</p>
+                <p>✉️ contacto@gsprotect.com.mx</p>
+                <p>📍 Av. Costera Miguel Alemán #123, Acapulco, Gro.</p>
+            </div>
+            <div class="footer-social">
+                <h4>Síganos en Redes</h4>
+                <div class="social-links">
+                    <a href="https://wa.me/527441234567" target="_blank" class="social-link wa">WhatsApp</a>
+                    <a href="https://facebook.com" target="_blank" class="social-link fb">Facebook</a>
+                    <a href="https://instagram.com" target="_blank" class="social-link ig">Instagram</a>
+                    <a href="mailto:contacto@gsprotect.com.mx" class="social-link em">Email</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2026 GS-Protect & Clean - Todos los derechos reservados. Servicios exclusivos en Acapulco y zona metropolitana.</p>
+        </div>
+    </div>
+</footer>
+
+@* Chatbot Inteligente - Mini *@
+<div class="chatbot-container-mini @(isChatOpen ? "open" : "")">
+    <div class="chatbot-header-mini" @onclick="ToggleChat">
+        <div class="chatbot-title-mini">
+            <span class="bot-avatar-mini">🤖</span>
+            <span>Asistente GS</span>
+        </div>
+    </div>
+    @if (isChatOpen)
+    {
+        <div class="chatbot-body-mini">
+            <div class="messages-area-mini" id="chatMessages">
+                <div class="chat-message-mini bot">
+                    <div class="message-content-mini">
+                        Buenos días, soy el asistente virtual de GS-Protect & Clean. ¿En qué servicio puedo ayudarle hoy? (Seguridad / Limpieza)
+                    </div>
+                </div>
+                @if (!string.IsNullOrEmpty(userMessage))
+                {
+                    <div class="chat-message-mini user">
+                        <div class="message-content-mini">
+                            @userMessage
+                        </div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(botResponse))
+                {
+                    <div class="chat-message-mini bot">
+                        <div class="message-content-mini">
+                            @botResponse
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="chat-input-area-mini">
+                <input @bind="userMessage" @bind:event="oninput" placeholder="Mensaje..." @onkeyup="HandleKeyUp" />
+                <button @onclick="SendMessage">➤</button>
+            </div>
+        </div>
+    }
+</div>
+
+@* Code-behind *@
+@code {
+    private bool isChatOpen = false;
+    private string userMessage = "";
+    private string botResponse = "";
+
+    private void ToggleChat()
+    {
+        isChatOpen = !isChatOpen;
+    }
+
+    private async Task HandleKeyUp(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await SendMessage();
+        }
+    }
+
+    private async Task SendMessage()
+    {
+        if (string.IsNullOrWhiteSpace(userMessage)) return;
+
+        var userInput = userMessage;
+        var lowerMsg = userInput.ToLower();
+
+        // Limpiar input inmediatamente
+        userMessage = "";
+
+        // Forzar actualización para limpiar el input visualmente
+        StateHasChanged();
+
+        await Task.Delay(300);
+
+        // Generar respuesta del bot
+        if (lowerMsg.Contains("seguridad"))
+            botResponse = "Nuestro servicio de seguridad incluye vigilancia 24/7, control de accesos y escoltas. ¿Le gustaría recibir una cotización personalizada para su negocio en Acapulco?";
+        else if (lowerMsg.Contains("limpieza"))
+            botResponse = "Ofrecemos limpieza profunda, sanitización y mantenimiento de pisos. ¿Qué tipo de instalaciones necesita limpiar? (Hoteles, oficinas, industrias)";
+        else
+            botResponse = "Por favor, especifique si necesita ayuda con nuestros servicios de Seguridad o Limpieza. Un asesor en Acapulco le contactará en menos de 30 minutos.";
+
+        // Actualizar la UI con la respuesta
+        StateHasChanged();
+
+        // Opcional: auto-scroll al último mensaje
+        await Task.Delay(100);
+        await InvokeAsync(async () =>
+        {
+            await JSRuntime.InvokeVoidAsync("scrollToBottom", "chatMessages");
+        });
+    }
+}
