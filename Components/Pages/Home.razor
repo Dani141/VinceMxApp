@@ -123,17 +123,26 @@
     </div>
 </footer>
 
-@* Chatbot Inteligente - Mini *@
-<div class="chatbot-container-mini @(isChatOpen ? "open" : "")">
-    <div class="chatbot-header-mini" @onclick="ToggleChat">
-        <div class="chatbot-title-mini">
-            <span class="bot-avatar-mini">🤖</span>
-            <span>Asistente GS</span>
-        </div>
-    </div>
-    @if (isChatOpen)
+@* Chatbot Mini - Estilo Círculo Amarillo *@
+<div class="chatbot-float-container @(isChatOpen ? "open" : "")">
+    @if (!isChatOpen)
     {
-        <div class="chatbot-body-mini">
+        <button class="chatbot-float-btn" @onclick="ToggleChat">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chat-icon-main">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chat-icon-back">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </button>
+    }
+    else
+    {
+        <div class="chatbot-window">
+            <div class="chatbot-window-header">
+                <span>Asistente GS-Protect</span>
+                <button class="chat-close-btn" @onclick="ToggleChat">✕</button>
+            </div>
             <div class="messages-area-mini" id="chatMessages">
                 <div class="chat-message-mini bot">
                     <div class="message-content-mini">
@@ -158,12 +167,24 @@
                 }
             </div>
             <div class="chat-input-area-mini">
-                <input @bind="userMessage" @bind:event="oninput" placeholder="Mensaje..." @onkeyup="HandleKeyUp" />
-                <button @onclick="SendMessage">➤</button>
+                <input @bind="userMessage"
+                       @bind:event="oninput"
+                       placeholder="Escribe aquí..."
+                       @onkeydown="HandleKeyDown"
+                       @onclick:stopPropagation="true" />
+                <button @onclick="SendMessage" @onclick:stopPropagation="true">➤</button>
             </div>
         </div>
     }
 </div>
+
+<script>
+    window.scrollToBottom = (elementId) => {
+        const element = document.getElementById(elementId);
+        if (element) 
+            element.scrollTop = element.scrollHeight;
+    };
+</script>
 
 @* Code-behind *@
 @code {
@@ -176,7 +197,7 @@
         isChatOpen = !isChatOpen;
     }
 
-    private async Task HandleKeyUp(KeyboardEventArgs e)
+    private async Task HandleKeyDown(KeyboardEventArgs e)
     {
         if (e.Key == "Enter")
         {
@@ -191,15 +212,14 @@
         var userInput = userMessage;
         var lowerMsg = userInput.ToLower();
 
-        // Limpiar input inmediatamente
         userMessage = "";
 
-        // Forzar actualización para limpiar el input visualmente
         StateHasChanged();
 
-        await Task.Delay(300);
+        await Task.Delay(50);
 
-        // Generar respuesta del bot
+        await JSRuntime.InvokeVoidAsync("scrollToBottom", "chatMessages");
+
         if (lowerMsg.Contains("seguridad"))
             botResponse = "Nuestro servicio de seguridad incluye vigilancia 24/7, control de accesos y escoltas. ¿Le gustaría recibir una cotización personalizada para su negocio en Acapulco?";
         else if (lowerMsg.Contains("limpieza"))
@@ -207,14 +227,9 @@
         else
             botResponse = "Por favor, especifique si necesita ayuda con nuestros servicios de Seguridad o Limpieza. Un asesor en Acapulco le contactará en menos de 30 minutos.";
 
-        // Actualizar la UI con la respuesta
         StateHasChanged();
 
-        // Opcional: auto-scroll al último mensaje
-        await Task.Delay(100);
-        await InvokeAsync(async () =>
-        {
-            await JSRuntime.InvokeVoidAsync("scrollToBottom", "chatMessages");
-        });
+        await Task.Delay(50);
+        await JSRuntime.InvokeVoidAsync("scrollToBottom", "chatMessages");
     }
 }
